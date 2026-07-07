@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Similia Stock Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="top-nav slide-down">
+        <div class="nav-brand">
+            <i class="fa-solid fa-leaf brand-icon"></i>
+            <h2>Similia Stock</h2>
+        </div>
+
+        <div class="nav-menu">
+            <a href="index.html" class="nav-link active"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+            <a href="report.html" class="nav-link"><i class="fa-solid fa-file-export"></i> Reports</a>
+        </div>
+
+        <div class="nav-right">
+            <button id="themeToggle" class="theme-btn" title="Toggle Light/Dark Mode">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+            <div class="user-profile">
+                <span class="user-name">Anike Hasan</span>
+                <div class="avatar"><i class="fa-solid fa-user-tie"></i></div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="dashboard-view" class="view-section active-view fade-in">
+            <section class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper"><i class="fa-solid fa-layer-group"></i></div>
+                    <div class="stat-details">
+                        <p>Total Products</p>
+                        <h3 id="totalProductsStat">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card" id="todaySalesCard" style="cursor: pointer;" title="Click to view today's sales">
+                    <div class="stat-icon-wrapper success"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                    <div class="stat-details">
+                        <p>Today's Sales</p>
+                        <h3 id="todaySalesStat">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card" id="lowStockCard" style="cursor: pointer;" title="Click to view low stock items">
+                    <div class="stat-icon-wrapper warning"><i class="fa-solid fa-bell"></i></div>
+                    <div class="stat-details">
+                        <p>Low Stock</p>
+                        <h3 id="lowStockStat" class="text-warning">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card" id="expiringCard" style="cursor: pointer;" title="Click to view expiring items">
+                    <div class="stat-icon-wrapper" style="background-color: rgba(239, 68, 68, 0.1); color: var(--danger);"><i class="fa-solid fa-calendar-xmark"></i></div>
+                    <div class="stat-details">
+                        <p>Expiring Soon</p>
+                        <h3 id="expiringStat" style="color: var(--danger);">0</h3>
+                    </div>
+                </div>
+            </section>
+
+            <div class="dashboard-grid">
+                <section class="form-section">
+                    <div class="section-header">
+                        <h3><i class="fa-solid fa-pen-to-square"></i> Record Transaction</h3>
+                    </div>
+                    <form id="stockForm">
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="productId">Product ID</label>
+                                <input list="product-suggestions" type="text" id="productId" placeholder="e.g., P-001"
+                                    required autocomplete="off">
+                                <datalist id="product-suggestions"></datalist>
+                            </div>
+                            <div class="input-group">
+                                <label for="productName">Product Name</label>
+                                <input type="text" id="productName" placeholder="Auto-filled..." required readonly
+                                    class="readonly-input">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="category">Category</label>
+                            <input type="text" id="category" placeholder="Auto-filled..." required readonly
+                                class="readonly-input">
+                        </div>
+
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="transactionType">Transaction Type</label>
+                                <select id="transactionType" required>
+                                    <option value="Sell">Sell (Out)</option>
+                                    <option value="Buy">Buy (In)</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="quantity">Quantity</label>
+                                <div class="input-group hidden" id="expiryDateGroup">
+                                <label for="expiryDate">Expiry Date (For Buy Only)</label>
+                                <input type="date" id="expiryDate">
+                            </div>
+                                <input type="number" id="quantity" min="1" placeholder="0" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="btn-glow">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> Save to Database
+                        </button>
+                        <div id="statusMessage" class="status-msg hidden"></div>
+                    </form>
+                </section>
+
+                <section class="table-section">
+                    <div class="section-header">
+                        <h3><i class="fa-solid fa-clock-rotate-left"></i> Recent Activity</h3>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="transactionTable">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>ID</th>
+                                    <th>Product</th>
+                                    <th>Type</th>
+                                    <th>Qty</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- JS Data -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

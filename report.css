@@ -1,0 +1,28 @@
+/* Report Page Layout */
+.report-container { max-width: 1000px; margin: 0 auto; }
+.report-header-card { display: flex; justify-content: space-between; align-items: center; background: var(--card-bg); padding: 1.5rem 2rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid var(--border-color); }
+.report-controls { display: flex; gap: 1rem; align-items: center; }
+.form-input { padding: 0.8rem; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-main); }
+.report-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+/* Invoice Styles */
+.invoice-wrapper { margin-top: 3rem; animation: fadeIn 0.6s ease forwards; }
+.invoice-actions { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
+.invoice-actions .btn-glow { background-color: #ef4444; width: auto; padding: 0.8rem 1.5rem; }
+.invoice-container { background-color: #ffffff; color: #000000; padding: 3rem; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+.invoice-header { display: flex; justify-content: space-between; border-bottom: 2px solid #e5e7eb; padding-bottom: 1.5rem; margin-bottom: 2rem; }
+.invoice-brand h2 { color: #10b981; font-size: 1.8rem; margin-bottom: 0.5rem; }
+.invoice-brand p { color: #4b5563; font-weight: 500; font-size: 1rem; }
+.invoice-meta { text-align: right; }
+.invoice-meta h3 { color: #1f2937; font-size: 1.2rem; margin-bottom: 0.5rem; }
+.invoice-meta p { color: #6b7280; font-size: 0.9rem; }
+.invoice-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+.invoice-table th { background-color: #f3f4f6; color: #374151; padding: 1rem; border: 1px solid #e5e7eb; text-align: left; }
+.invoice-table td { padding: 1rem; border: 1px solid #e5e7eb; color: #1f2937; }
+.invoice-footer { display: flex; justify-content: flex-end; }
+.summary-box { background-color: #f9fafb; padding: 1.5rem; border: 1px solid #e5e7eb; border-radius: 8px; width: 300px; }
+.summary-box p { display: flex; justify-content: space-between; margin-bottom: 0.8rem; font-size: 1rem; color: #374151; }
+.summary-box hr { border: 0; border-top: 1px solid #d1d5db; margin: 1rem 0; }
+.summary-box strong { font-size: 1.2rem; }
+.text-buy { color: #10b981; }
+.text-sell { color: #ef4444; }
