@@ -360,3 +360,52 @@ document.getElementById('todaySalesCard').addEventListener('click', function() {
 });
 
 // =============================================================================
+
+// ================= TOTAL PRODUCTS (CURRENT STOCK) CLICK FEATURE =================
+document.getElementById('totalProductsCard').addEventListener('click', function() {
+    const tbody = document.querySelector('#transactionTable tbody');
+    const tableHeader = document.querySelector('.table-section .section-header h3');
+    
+    // টেবিলের হেডার পরিবর্তন করা এবং Back বাটন যুক্ত করা
+    tableHeader.innerHTML = '<i class="fa-solid fa-boxes-stacked" style="color:var(--accent)"></i> Current Stock Status <span style="font-size:0.8rem; cursor:pointer; color:var(--accent); float:right;" id="resetTableBtnStock"><i class="fa-solid fa-rotate-left"></i> Back to Recent</span>';
+    
+    tbody.innerHTML = ''; // টেবিল ক্লিয়ার করা
+    
+    if (productDB.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--text-muted);">কোনো প্রোডাক্ট পাওয়া যায়নি!</td></tr>';
+    } else {
+        // productDB থেকে সব প্রোডাক্টের লিস্ট টেবিলে বসানো
+        productDB.forEach(item => {
+            const row = document.createElement('tr');
+            row.classList.add('fade-in'); 
+            
+            // স্টকের পরিমাণের ওপর ভিত্তি করে কালার চেঞ্জ করা (UX)
+            let stockColor = "var(--accent)"; // স্বাভাবিক স্টক (সবুজ)
+            if (item.stock === 0) {
+                stockColor = "var(--danger)"; // স্টক আউট (লাল)
+            } else if (item.stock <= 5) {
+                stockColor = "var(--warning)"; // লো-স্টক (হলুদ)
+            }
+
+            row.innerHTML = `
+                <td style="color:var(--text-muted);">-</td>
+                <td><strong>${item.id}</strong></td>
+                <td>${item.name}</td>
+                <td><span class="type-badge" style="background-color:var(--bg-color); color:var(--text-main); border: 1px solid var(--border-color);">${item.category}</span></td>
+                <td><strong style="color:${stockColor}; font-size: 1.1rem;">${item.stock}</strong></td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    // "Back to Recent" বাটনে ক্লিক করলে আবার আগের লিস্ট দেখাবে
+    document.getElementById('resetTableBtnStock').addEventListener('click', function() {
+        tableHeader.innerHTML = '<i class="fa-solid fa-clock-rotate-left"></i> Recent Activity';
+        tbody.innerHTML = '';
+        const displayLimit = Math.min(allTransactions.length, 15);
+        const latestTransactions = allTransactions.slice(0, displayLimit); 
+        latestTransactions.forEach(item => {
+            updateLocalTable(item, false); 
+        });
+    });
+});
